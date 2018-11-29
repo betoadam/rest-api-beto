@@ -1,0 +1,753 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0.0"
+  title: "Document Database Documentation"
+host: "localhost"
+basePath: "/RestApiWithJava"
+schemes:
+- "http"
+paths:
+  /keyword:
+    post:
+      tags:
+      - "keyword"
+      summary: "Adiciona uma nova Keyword a aplicação "
+      description: ""
+      operationId: "addKeyword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Dados da Keyword a ser adicionada a aplicação."
+        required: true
+        schema:
+          $ref: "#/definitions/Keyword"
+      responses:
+        400:
+          description: "Campos Invalidos"
+      security: 
+      - document_auth: []
+    put:
+      tags:
+      - "keyword"
+      summary: "Atualiza uma keyword existente"
+      description: ""
+      operationId: "updateKeyword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Keyword que deve ser atualizada"
+        required: true
+        schema:
+          $ref: "#/definitions/Keyword"
+      responses:
+        200:
+          description: "OK"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "keyword"
+      summary: "retorna todas as keywords existentes"
+      description: ""
+      operationId: "findAllKeywords"
+      produces: 
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Keyword"
+      security: 
+      - document_auth: []
+  /keyword/{Keyword}:
+    delete:
+      tags:
+      - "keyword"
+      summary: "Deleta a Keyword"
+      description: ""
+      operationId: "deleteKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "Keyword"
+        in: "path"
+        description: "id da keyword a ser deletada"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "Keyword não encontrada"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "keyword"
+      summary: "retorna a keyword com o nome enviado"
+      description: ""
+      operationId: "findAKeyword"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "Keyword"
+        in: "path"
+        description: "nome da keyword a ser retornada"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Keyword"
+      security: 
+      - document_auth: []
+  /keyword/id/{Keyword}:
+    get:
+      tags:
+      - "keyword"
+      summary: "retorna a keyword com o id enviado"
+      description: ""
+      operationId: "findKeywordByID"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "Keyword"
+        in: "path"
+        description: "id da keyword a ser retornada"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Keyword"
+      security: 
+      - document_auth: []
+  /endereco:
+    post:
+      tags:
+      - "endereco"
+      summary: "Adiciona um novo endereço a aplicação "
+      description: ""
+      operationId: "addEndereco"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Dados do endereço a ser adicionado a aplicação."
+        required: true
+        schema:
+          $ref: '#/definitions/Endereco'
+      responses:
+        400:
+          description: "Campos Invalidos"
+      security: 
+      - document_auth: []
+    put:
+      tags:
+      - "endereco"
+      summary: "Atualiza um endereço existente"
+      description: ""
+      operationId: "updateEndereco"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Endereço que deve ser atualizada"
+        required: true
+        schema:
+          $ref: '#/definitions/Endereco'
+      responses:
+        200:
+          description: "OK"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "endereco"
+      summary: "retorna todos os endereços existentes"
+      description: ""
+      operationId: "findAllEndereco"
+      produces: 
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Endereco'
+      security: 
+      - document_auth: []
+  /endereco/{EnderecoId}:
+    delete:
+      tags:
+      - "endereco"
+      summary: "Deleta o endereço"
+      description: ""
+      operationId: "deleteEndereco"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "EnderecoId"
+        in: "path"
+        description: "id do endereço a ser deletado"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "Endereço não encontrado"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "endereco"
+      summary: "retorna o endereço com o id enviado"
+      description: ""
+      operationId: "findEndereco"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "EnderecoId"
+        in: "path"
+        description: "id do endereço a ser retornado"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Endereco'
+      security: 
+      - document_auth: []
+  /category:
+    post:
+      tags:
+      - "category"
+      summary: "Adiciona uma nova categoria a aplicação "
+      description: ""
+      operationId: "addCategory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Dados da categoria a ser adicionada a aplicação."
+        required: true
+        schema:
+          $ref: '#/definitions/Category'
+      responses:
+        400:
+          description: "Campos Invalidos"
+      security: 
+      - document_auth: []
+      - admin_auth: []
+    put:
+      tags:
+      - "category"
+      summary: "Atualiza uma categoria existente"
+      description: ""
+      operationId: "updateCategory"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Categoria que deve ser atualizada"
+        required: true
+        schema:
+          $ref: '#/definitions/Category'
+      responses:
+        200:
+          description: "OK"
+      security: 
+      - document_auth: []
+      - admin_auth: []
+    get:
+      tags:
+      - "category"
+      summary: "retorna todas as categorias existentes"
+      description: ""
+      operationId: "findAllCategory"
+      produces: 
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Category'
+      security: 
+      - document_auth: []
+      - admin_auth: []
+  /category/{CategoryId}:
+    delete:
+      tags:
+      - "category"
+      summary: "Deleta a categoria"
+      description: ""
+      operationId: "deleteCategory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "CategoryId"
+        in: "path"
+        description: "id da categoria a ser deletada"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "categoria não encontrada"
+      security: 
+      - document_auth: []
+      - admin_auth: []
+    get:
+      tags:
+      - "category"
+      summary: "retorna a categoria com o id enviado"
+      description: ""
+      operationId: "findCategory"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "CategoryId"
+        in: "path"
+        description: "id da categoria a ser retornada"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Category'
+      security: 
+      - document_auth: []
+      - admin_auth: []
+  /category/person/{id}:
+    get:
+      tags:
+      - "category"
+      summary: "obtem todas as categorias de um usuario"
+      description: ""
+      operationId: "getAllCategories"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id do usuario"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Category'
+      security: 
+      - document_auth: []
+      - admin_auth: []
+  /pessoa:
+    post:
+      tags:
+      - "pessoa"
+      summary: "Adiciona uma nova pessoa a aplicação "
+      description: ""
+      operationId: "addPessoa"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Dados da pessoa a ser adicionada a aplicação."
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: '#/definitions/Pessoa'
+      responses:
+        400:
+          description: "Campos Invalidos"
+    put:
+      tags:
+      - "pessoa"
+      summary: "Atualiza uma pessoa existente"
+      description: ""
+      operationId: "updatePessoa"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pessoa que deve ser atualizada"
+        required: true
+        schema:
+          $ref: '#/definitions/Pessoa'
+      responses:
+        200:
+          description: "OK"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "pessoa"
+      summary: "retorna todas as pessoas existentes"
+      description: ""
+      operationId: "findAllPessoas"
+      produces: 
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Pessoa'
+      security: 
+      - document_auth: []
+  /pessoa/{PessoaId}:
+    delete:
+      tags:
+      - "pessoa"
+      summary: "Deleta a pessoa"
+      description: ""
+      operationId: "deletePessoa"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "PessoaId"
+        in: "path"
+        description: "id da pessoa a ser deletada"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "pessoa não encontrada"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "pessoa"
+      summary: "retorna a pessoa com o id enviado"
+      description: ""
+      operationId: "findPessoa"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "PessoaId"
+        in: "path"
+        description: "id da pessoa a ser retornada"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Pessoa'
+      security: 
+      - document_auth: []
+  /document:
+    post:
+      tags:
+      - "document"
+      summary: "Adiciona um novo documento a aplicação "
+      description: ""
+      operationId: "addDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Dados do document a ser adicionado a aplicação."
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: '#/definitions/Document'
+      responses:
+        400:
+          description: "Campos Invalidos"
+      security: 
+      - document_auth: []
+    put:
+      tags:
+      - "document"
+      summary: "Atualiza um documento existente"
+      description: ""
+      operationId: "updateDocument"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Documento que deve ser atualizado"
+        required: true
+        schema:
+          $ref: '#/definitions/Document'
+      responses:
+        200:
+          description: "OK"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "document"
+      summary: "retorna todos os documentos existentes"
+      description: ""
+      operationId: "findAllDocuments"
+      produces: 
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Document'
+      security: 
+      - document_auth: []
+  /document/{DocumentId}:
+    delete:
+      tags:
+      - "document"
+      summary: "Deleta o documento"
+      description: ""
+      operationId: "deleteDocument"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "DocumentId"
+        in: "path"
+        description: "id do documento a ser deletado"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "documento não encontrado"
+      security: 
+      - document_auth: []
+    get:
+      tags:
+      - "document"
+      summary: "retorna o documento com o id enviado"
+      description: ""
+      operationId: "findDocument"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "DocumentId"
+        in: "path"
+        description: "id do documento a ser retornado"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: '#/definitions/Document'
+      security: 
+      - document_auth: []
+  /document/person/{id}:
+    get:
+      tags:
+      - "document"
+      summary: "obtem todos os documentos de um usuario"
+      description: ""
+      operationId: "getAllDocuments"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id do usuario"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Document'
+      security: 
+      - document_auth: []
+  /document/tag/{name}:
+    get:
+      tags:
+      - "document"
+      summary: "obtem todos os documentos com a categoria enviada"
+      description: ""
+      operationId: "getDocumentsByKeyword"
+      produces: 
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "nome da categoria"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Document'
+      security: 
+      - document_auth: []
+      
+  /login:
+    post:
+      tags:
+      - "Authentication"
+      summary: "Autentica um usuario do sistema"
+      description: ""
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "text/html"
+      - "text/plain"
+      parameters:
+      - name: "login"
+        in: "query"
+        description: "Login do usuario"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "Senha do usuario"
+        required: true
+        type: "string"
+      responses:
+        404:
+          description: "Campos Invalidos"
+
+securityDefinitions:
+  document_auth:
+    type: "oauth2"
+    authorizationUrl: "http://teste.com.br/login"
+    flow: "implicit"
+  admin_auth:
+    type: "oauth2"
+    authorizationUrl: "http://teste.com.br/login"
+    flow: "implicit"
+    
+definitions:
+  Category:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+  Keyword:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      documents:
+        type: "array"
+        items:
+          $ref: "#/definitions/Document"
+  Endereco:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      endereco:
+        type: "string"
+      numero:
+        type: "string"
+      cep:
+        type: "string"
+      municipio:
+        type: "string"
+      estado:
+        type: "string"
+      pais:
+        type: "string"
+  Document:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+      date:
+        type: "string"
+      lastUpdate:
+        type: "string"
+      filename:
+        type: "string"
+      category:
+        $ref: "#/definitions/Category"
+      keywords:
+        type: "array"
+        items:
+          $ref: "#/definitions/Keyword"
+  Pessoa:
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+        format: "int64"
+      nome:
+        type: "string"
+      login:
+        type: "string"
+      senha:
+        type: "string"
+      endereco:
+        $ref: "#/definitions/Endereco"
+      documents:
+        type: "array"
+        items:
+          $ref: "#/definitions/Document"
