@@ -10,10 +10,10 @@ public class KeywordDAO extends GenericDAO<Integer, Keyword> {
         super();
     }
 
-    public Keyword getByName(String name) {
+    public Keyword getByName(String nome) {
         Keyword k = null;
         try {
-            k = entityManager.createQuery(("SELECT e FROM Keyword e WHERE e.name LIKE '" + name + "'"), Keyword.class).getSingleResult();
+            k = entityManager.createQuery(("SELECT e FROM Keyword e WHERE e.nome LIKE '" + nome + "'"), Keyword.class).getSingleResult();
         } catch (Exception e) {
         }
         return k;

@@ -41,7 +41,7 @@ public class AdminInterceptor {
         if (!role.equals("Admin")) {
             result.use(Results.http()).setStatusCode(401);
             result.use(Results.json())
-                    .from("Acesso Permitido Somente para Administradores", "msg").serialize();
+                    .from("Apenas ADM", "msg").serialize();
         }else{
             result.use(Results.http()).addHeader("Authorization", token);
             stack.next();

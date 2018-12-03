@@ -1,7 +1,7 @@
 package br.edu.utfpr.md.dao;
 
 import br.edu.utfpr.md.model.Admin;
-import br.edu.utfpr.md.model.Category;
+import br.edu.utfpr.md.model.Categoria;
 import br.edu.utfpr.md.model.Pessoa;
 import br.edu.utfpr.md.model.User;
 import java.util.ArrayList;
@@ -27,18 +27,11 @@ public class PessoaDAO extends GenericDAO<Integer, Pessoa> {
         return p;
     }
 
-    public List<Category> getDistinctCategories(Pessoa p) {
-        List<Category> lista = new ArrayList<>();
+    public List<Categoria> getDistinctCategories(Pessoa p) {
+        List<Categoria> lista = new ArrayList<>();
         try {
-            TypedQuery<Category> cat = entityManager.createQuery(""
-                    + "SELECT "
-                    + "     DISTINCT(d.category) "
-                    + "FROM "
-                    + "     Pessoa p, "
-                    + "     Document d "
-                    + "WHERE "
-                    + "     p.documents = d"
-                    + "     AND p.id = " + p.getId(), Category.class);
+            TypedQuery<Categoria> cat = 
+                    entityManager.createQuery("SELECT DISTINCT(d.categoria) FROM Pessoa p, Documento d WHERE p.documentos = d AND p.id = " + p.getId(), Categoria.class);
             lista = cat.getResultList();
         } catch (Exception e) {
         }

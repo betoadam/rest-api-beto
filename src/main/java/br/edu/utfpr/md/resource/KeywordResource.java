@@ -57,9 +57,9 @@ public class KeywordResource {
     }
 
     @Autenticado
-    @Get("/{name}")
-    public void getOne(String name) {
-        Keyword k = keywordDAO.getByName(name);
+    @Get("/{nome}")
+    public void getOne(String nome) {
+        Keyword k = keywordDAO.getByName(nome);
         result.use(Results.json()).withoutRoot().from(k).serialize();
     }
 
