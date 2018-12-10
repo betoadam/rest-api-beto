@@ -18,15 +18,7 @@ public class DocumentDAO extends GenericDAO<Integer, Document> {
     public List<Document> getDocumentsByUser(Pessoa p) {
         List<Document> lista = new ArrayList<>();
         try {
-            TypedQuery<Document> cat = entityManager.createQuery(""
-                    + "SELECT "
-                    + "     d "
-                    + "FROM "
-                    + "     Pessoa p, "
-                    + "     Document d "
-                    + "WHERE "
-                    + "     p.documents = d"
-                    + "     AND p.id = " + p.getId(),
+            TypedQuery<Document> cat = entityManager.createQuery("SELECT d FROM Pessoa p, Document d WHERE p.documents = d AND p.id = " + p.getId(),
                     Document.class);
             lista = cat.getResultList();
         } catch (Exception e) {
@@ -37,15 +29,7 @@ public class DocumentDAO extends GenericDAO<Integer, Document> {
     public List<Document> getDocumentsByKeyword(Keyword k) {
         List<Document> lista = new ArrayList<>();
         try {
-            TypedQuery<Document> doc = entityManager.createQuery(""
-                    + "SELECT "
-                    + "     d "
-                    + "FROM "
-                    + "     Keyword k, "
-                    + "     Document d "
-                    + "WHERE "
-                    + "     d.keywords = k"
-                    + "     AND k.id = " + k.getId(),
+            TypedQuery<Document> doc = entityManager.createQuery("SELECT d FROM Keyword k, Document d WHERE d.keywords = k AND k.id = " + k.getId(),
                     Document.class);
             lista = doc.getResultList();
         } catch (Exception e) {

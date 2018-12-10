@@ -10,11 +10,30 @@ public class User extends Pessoa{
     }
     // extends pessoa
 
-    public User(int id, String nome, String login, String senha, Endereco endereco) {
-        super(id, nome, login, senha, endereco);
+    public User(
+            int id, 
+            String nome, 
+            String login, 
+            String senha, 
+            Endereco endereco
+    ) 
+    {
+        super(
+                id, 
+                nome, 
+                login, 
+                senha, 
+                endereco
+        );
     }
     
     public User (Pessoa p){
-        super(p.getId(), p.getNome(), p.getLogin(), p.getSenha(), p.getEndereco());
+        super(
+                p.getId(), 
+                p.getNome(), 
+                p.getLogin(), 
+                p.getSenha(), 
+                p.getEndereco()
+        );
     }
 }

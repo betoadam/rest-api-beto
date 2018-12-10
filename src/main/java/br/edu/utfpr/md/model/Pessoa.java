@@ -35,13 +35,20 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Documento.class)
-    private Collection<Documento> documentos = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST, targetEntity = Document.class)
+    private Collection<Document> documents = new ArrayList<>();
 
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, String login, String senha, Endereco endereco) {
+    public Pessoa(
+            int id, 
+            String nome, 
+            String login, 
+            String senha, 
+            Endereco endereco
+    ) 
+    {
         this.id = id;
         this.nome = nome;
         this.login = login;
@@ -89,17 +96,24 @@ public class Pessoa implements Serializable {
         this.endereco = endereco;
     }
 
-    public Collection<Documento> getDocumentos() {
-        return documentos;
+    public Collection<Document> getDocuments() {
+        return documents;
     }
 
-    public void setDocumentos(Collection<Documento> documentos) {
-        this.documentos = documentos;
+    public void setDocuments(Collection<Document> documents) {
+        this.documents = documents;
     }
 
     @Override
     public String toString() {
-        return "Pessoa{" + "id=" + id + ", nome=" + nome + ", login=" + login + ", senha=" + senha + ", endereco=" + endereco + ", documentos=" + documentos + '}';
+        return "Pessoa{" 
+                + "id=" + id 
+                + ", nome=" + nome 
+                + ", login=" + login 
+                + ", senha=" + senha 
+                + ", endereco=" + endereco 
+                + ", documents=" + documents 
+                + '}';
     }
 
 }

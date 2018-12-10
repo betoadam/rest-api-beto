@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "Document Database Documentation"
 host: "localhost"
-basePath: "/RestApiWithJava"
+basePath: "/rest-api-beto"
 schemes:
 - "http"
 paths:

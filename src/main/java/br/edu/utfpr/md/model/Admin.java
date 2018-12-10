@@ -11,12 +11,31 @@ public class Admin extends Pessoa{
     
     // extends Pessoa
 
-    public Admin(int id, String nome, String login, String senha, Endereco endereco) {
-        super(id, nome, login, senha, endereco);
+    public Admin(
+            int id, 
+            String nome, 
+            String login, 
+            String senha, 
+            Endereco endereco
+    ) 
+    {
+        super(
+                id, 
+                nome, 
+                login, 
+                senha, 
+                endereco
+        );
     }
     
     public Admin (Pessoa p){
-        super(p.getId(), p.getNome(), p.getLogin(), p.getSenha(), p.getEndereco());
+        super(
+                p.getId(), 
+                p.getNome(), 
+                p.getLogin(), 
+                p.getSenha(), 
+                p.getEndereco()
+        );
     }
     
     

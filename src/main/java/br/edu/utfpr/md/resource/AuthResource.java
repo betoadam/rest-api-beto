@@ -29,10 +29,6 @@ public class AuthResource {
             String pessoaType = "";
             if (p instanceof Admin) {
                 pessoaType = "Admin";
-            } else if (p instanceof User) {
-                pessoaType = "User";
-            } else {
-                pessoaType = "Pessoa";
             }
             String token = JWTUtil.createToken((long) p.getId(), p.getLogin(), pessoaType);
 

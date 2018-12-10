@@ -1,7 +1,7 @@
 package br.edu.utfpr.md.dao;
 
 import br.edu.utfpr.md.model.Admin;
-import br.edu.utfpr.md.model.Categoria;
+import br.edu.utfpr.md.model.Category;
 import br.edu.utfpr.md.model.Pessoa;
 import br.edu.utfpr.md.model.User;
 import java.util.ArrayList;
@@ -20,18 +20,17 @@ public class PessoaDAO extends GenericDAO<Integer, Pessoa> {
         Pessoa p = null;
         try {
             p = entityManager.createQuery(
-                    "SELECT p FROM Pessoa p WHERE p.login = '" + username
-                    + "' AND p.senha = '" + password + "'", Pessoa.class).getSingleResult();
+                    "SELECT p FROM Pessoa p WHERE p.login = '" + username + "' AND p.senha = '" + password + "'", Pessoa.class).getSingleResult();
         } catch (Exception e) {
         }
         return p;
     }
 
-    public List<Categoria> getDistinctCategories(Pessoa p) {
-        List<Categoria> lista = new ArrayList<>();
+    public List<Category> getDistinctCategories(Pessoa p) {
+        List<Category> lista = new ArrayList<>();
         try {
-            TypedQuery<Categoria> cat = 
-                    entityManager.createQuery("SELECT DISTINCT(d.categoria) FROM Pessoa p, Documento d WHERE p.documentos = d AND p.id = " + p.getId(), Categoria.class);
+            TypedQuery<Category> cat = entityManager.createQuery("SELECT DISTINCT(d.category) FROM Pessoa p, Document d WHERE p.documents = d"
+                    + "     AND p.id = " + p.getId(), Category.class);
             lista = cat.getResultList();
         } catch (Exception e) {
         }
@@ -41,11 +40,7 @@ public class PessoaDAO extends GenericDAO<Integer, Pessoa> {
     @Override
     public void save(Pessoa p) {
         Pessoa entity;
-        if (p.getLogin().contains("admin")) {
             entity = new Admin(p);
-        } else {
-            entity = new User(p);
-        }
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();

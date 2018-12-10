@@ -47,7 +47,15 @@ public class Document implements Serializable {
     public Document() {
     }
 
-    public Document(int id, String description, Date date, Date lastUpdate, String fileName, Category category) {
+    public Document(
+            int id, 
+            String description, 
+            Date date, 
+            Date lastUpdate, 
+            String fileName, 
+            Category category
+    ) 
+    {
         this.id = id;
         this.description = description;
         this.date = date;
@@ -114,7 +122,14 @@ public class Document implements Serializable {
 
     @Override
     public String toString() {
-        return "Document{" + "id=" + id + ", description=" + description + ", date=" + date + ", lastUpdate=" + lastUpdate + ", fileName=" + fileName + ", category=" + category + ", keywords=" + keywords + '}';
+        return "Document{" 
+                + "id=" + id 
+                + ", description=" + description 
+                + ", date=" + date 
+                + ", lastUpdate=" + lastUpdate 
+                + ", fileName=" + fileName 
+                + ", category=" + category 
+                + ", keywords=" + keywords + '}';
     }
 
     

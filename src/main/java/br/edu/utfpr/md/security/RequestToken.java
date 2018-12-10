@@ -43,9 +43,16 @@ public class RequestToken {
         Map<String, Object> claims = null;
         try {
             return JWTUtil.decode(getToken());
-        } catch (InvalidKeyException | NoSuchAlgorithmException
-                | IllegalStateException | SignatureException | IOException
-                | JWTVerifyException e) {
+        }   
+            catch (
+                InvalidKeyException 
+                | NoSuchAlgorithmException
+                | IllegalStateException 
+                | SignatureException 
+                | IOException
+                | JWTVerifyException e
+            ) 
+        {
             result.use(Results.http()).setStatusCode(401);
             result.use(Results.json()).from(e.getMessage(), "msg").serialize();
         }

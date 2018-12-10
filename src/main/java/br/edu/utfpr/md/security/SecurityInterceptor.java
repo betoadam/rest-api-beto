@@ -51,7 +51,7 @@ public class SecurityInterceptor {
                 | IllegalStateException | SignatureException | IOException
                 | JWTVerifyException e) {
             result.use(Results.http()).setStatusCode(401);
-            result.use(Results.json()).from(e.getMessage(), "msg").serialize();
+            result.use(Results.json()).from(e.getMessage()+", token ta errado", "msg").serialize();
         }
     }
 }

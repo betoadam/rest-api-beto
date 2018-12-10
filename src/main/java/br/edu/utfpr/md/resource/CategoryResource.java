@@ -13,10 +13,10 @@ import br.edu.utfpr.md.dao.CategoryDAO;
 import br.edu.utfpr.md.dao.PessoaDAO;
 import br.edu.utfpr.md.model.Category;
 import br.edu.utfpr.md.model.Pessoa;
-import br.edu.utfpr.md.security.AdminAutenticado;
 import br.edu.utfpr.md.security.Autenticado;
 import java.util.List;
 import javax.inject.Inject;
+import br.edu.utfpr.md.security.AutenticadoMestre;
 
 @Controller
 @Path("/category")
@@ -30,7 +30,7 @@ public class CategoryResource {
     private Result result;
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Post(value = {"", "/"})
     @Consumes("application/json")
     public void save(Category category) {
@@ -43,7 +43,7 @@ public class CategoryResource {
     }
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Put(value = {"", "/"})
     @Consumes("application/json")
     public void update(Category category) {
@@ -52,7 +52,7 @@ public class CategoryResource {
     }
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Delete("/{id}")
     public void delete(int id) {
         Category p = categoryDAO.getById(id);
@@ -65,7 +65,7 @@ public class CategoryResource {
     }
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Get("/{id}")
     public void getOne(int id) {
         Category p = categoryDAO.getById(id);
@@ -73,7 +73,7 @@ public class CategoryResource {
     }
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Get(value = {"", "/"})
     public void getAll() {
         List<Category> list = categoryDAO.findAll();
@@ -81,7 +81,7 @@ public class CategoryResource {
     }
 
     @Autenticado
-    @AdminAutenticado
+    @AutenticadoMestre
     @Get(value = {"/person/{id}"})
     public void getAllCategories(int id) {
         // obtem todas as categorias de um usuario

@@ -17,16 +17,20 @@ public class Keyword implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;
+    private String name;
     @ManyToMany(mappedBy = "keywords")
-    private Collection<Documento> documentos = new ArrayList<>();
+    private Collection<Document> documents = new ArrayList<>();
 
     public Keyword() {
     }
 
-    public Keyword(int id, String nome) {
+    public Keyword(
+            int id, 
+            String name
+    ) 
+    {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
     }
 
     public int getId() {
@@ -37,20 +41,20 @@ public class Keyword implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Collection<Documento> getDocumentos() {
-        return documentos;
+    public Collection<Document> getDocuments() {
+        return documents;
     }
 
-    public void setDocumentos(Collection<Documento> documentos) {
-        this.documentos = documentos;
+    public void setDocuments(Collection<Document> documents) {
+        this.documents = documents;
     }
 
     

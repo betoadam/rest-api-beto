@@ -9,10 +9,10 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
-import br.edu.utfpr.md.dao.DocumentoDAO;
+import br.edu.utfpr.md.dao.DocumentDAO;
 import br.edu.utfpr.md.dao.KeywordDAO;
 import br.edu.utfpr.md.dao.PessoaDAO;
-import br.edu.utfpr.md.model.Documento;
+import br.edu.utfpr.md.model.Document;
 import br.edu.utfpr.md.model.Keyword;
 import br.edu.utfpr.md.model.Pessoa;
 import br.edu.utfpr.md.security.Autenticado;
@@ -21,13 +21,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 @Controller
-@Path("/documento")
+@Path("/document")
 public class DocumentResource {
 
     @Inject
     private RequestToken requestToken;
     @Inject
-    private DocumentoDAO documentoDAO;
+    private DocumentDAO documentDAO;
     @Inject
     private PessoaDAO pessoaDAO;
     @Inject
@@ -38,10 +38,10 @@ public class DocumentResource {
     @Autenticado
     @Post(value = {"", "/"})
     @Consumes("application/json")
-    public void save(Documento documento) {
+    public void save(Document document) {
         try {
-            documentoDAO.save(documento);
-            result.use(Results.json()).withoutRoot().from(documento).serialize();
+            documentDAO.save(document);
+            result.use(Results.json()).withoutRoot().from(document).serialize();
         } catch (Exception e) {
             result.use(Results.http()).setStatusCode(400);
         }
@@ -50,48 +50,48 @@ public class DocumentResource {
     @Autenticado
     @Put(value = {"", "/"})
     @Consumes("application/json")
-    public void update(Documento documento) {
-        Pessoa owner = documentoDAO.getDocumentOwner(documento);
+    public void update(Document document) {
+        Pessoa owner = documentDAO.getDocumentOwner(document);
         if (owner.getId() == requestToken.getUserID()) {
-            documentoDAO.update(documento);
-            result.use(Results.json()).withoutRoot().from(documento).serialize();
+            documentDAO.update(document);
+            result.use(Results.json()).withoutRoot().from(document).serialize();
         } else {
             result.use(Results.http()).setStatusCode(401);
             result.use(Results.json())
-                    .from("Você não tem permissão ", "msg").serialize();
+                    .from("Apenas usuarios adminitradores ou com permissão", "msg").serialize();
         }
     }
 
     @Autenticado
     @Delete("/{id}")
     public void delete(int id) {
-        Documento documento = documentoDAO.getById(id);
-        Pessoa owner = documentoDAO.getDocumentOwner(documento);
+        Document document = documentDAO.getById(id);
+        Pessoa owner = documentDAO.getDocumentOwner(document);
         if (owner.getId() == requestToken.getUserID()) {
-            if (documento == null) {
+            if (document == null) {
                 result.use(Results.status()).notFound();
             } else {
-                documentoDAO.delete(documento);
+                documentDAO.delete(document);
                 result.use(Results.nothing());
             }
         } else {
             result.use(Results.http()).setStatusCode(401);
             result.use(Results.json())
-                    .from("Você não tem permissão ", "msg").serialize();
+                    .from("Apenas usuarios adminitradores ou com permissão", "msg").serialize();
         }
     }
 
     @Autenticado
     @Get("/{id}")
     public void getOne(int id) {
-        Documento p = documentoDAO.getById(id);
+        Document p = documentDAO.getById(id);
         result.use(Results.json()).withoutRoot().from(p).serialize();
     }
 
     @Autenticado
     @Get(value = {"", "/"})
     public void getAll() {
-        List<Documento> list = documentoDAO.findAll();
+        List<Document> list = documentDAO.findAll();
         result.use(Results.json()).withoutRoot().from(list).serialize();
     }
 
@@ -99,16 +99,16 @@ public class DocumentResource {
     @Get(value = {"/person/{id}"})
     public void getDocumentsByUser(int id) {
         Pessoa p = pessoaDAO.getById(id);
-        List<Documento> documentos = documentoDAO.getDocumentsByUser(p);
-        result.use(Results.json()).withoutRoot().from(documentos).serialize();
+        List<Document> documents = documentDAO.getDocumentsByUser(p);
+        result.use(Results.json()).withoutRoot().from(documents).serialize();
     }
 
     @Autenticado
     @Get(value = {"/tag/{name}"})
     public void getDocumentsByKeyword(String name) {
-        // obtem todos os documentoos com a categoria "name"
+        // obtem todos os documentos com a categoria "name"
         Keyword k = keywordDAO.getByName(name);
-        List<Documento> documentos = documentoDAO.getDocumentsByKeyword(k);
-        result.use(Results.json()).withoutRoot().from(documentos).serialize();
+        List<Document> documents = documentDAO.getDocumentsByKeyword(k);
+        result.use(Results.json()).withoutRoot().from(documents).serialize();
     }
 }
